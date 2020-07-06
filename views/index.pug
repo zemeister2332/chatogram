@@ -1,0 +1,19 @@
+extends layout
+
+append stylesheets
+  link(rel='stylesheet', href='/stylesheets/index.css')
+  link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+
+
+block content
+  div(ng-controller="indexController")
+    .modal
+      .modal__inner
+        .modal__header
+          h2 Hush kelibsiz, iltimos ro'yhattan o'ting.
+        .modal__footer
+          a(href='#')
+            i.fa.fa-google-plus(aria-hidden='true')
+            | Google orqali ro'yhattan oting
+append javascripts
+  script(src="/javascripts/controller/indexController.js")

@@ -1,0 +1,13 @@
+{
+  "name": "chatogram",
+  "description": "Yangi Chat Tizimi",
+  "main": "app.js",
+  "authors": [
+    "zemeister2332 <zemeister2332@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zemeister2332/chatogram",
+  "dependencies": {
+    "angular": "^1.8.0"
+  }
+}

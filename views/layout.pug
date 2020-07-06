@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Chatogram
+    block stylesheets
+      link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div(ng-app="chatogram", ng-cloak)
+      block content
+
+
+  block javascripts
+    script(src="/angular/angular.min.js")
+    script(src="/javascripts/main.js")

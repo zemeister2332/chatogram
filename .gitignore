@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+*.idea
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -50,6 +52,7 @@ typings/
 # Optional npm cache directory
 .npm
 
+.env
 # Optional eslint cache
 .eslintcache
 
@@ -68,7 +71,7 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# dotenv environment constiables file
 .env
 .env.test
 
