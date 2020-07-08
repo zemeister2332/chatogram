@@ -1,0 +1,78 @@
+extends layout
+
+append stylesheets
+  link(rel='stylesheet', href='/stylesheets/chat.css')
+
+block content
+  div(ng-controller="chatController")
+    .wrapper
+      .container
+        .left
+          .top
+            ul.tab
+              li.conversations
+                a.active(href='#')  Chatlar
+              li.onlineUsers
+                a(href='#')  Tarmoqda
+          ul.people
+            li.person
+              span.name  Saud Sadikoff
+              span.preview Juda hayron qoldim...
+            li.person.active
+              span.name  Asror Zakari
+              span.preview Nima deyishgaham hayronman!
+            li.person
+              span.name  Bexruz
+              span.preview Lekin biz baribir yangi gilam olishimiz kerak.
+            li.person
+              span.name Shoxnur MS
+              span.preview Unchalik ham yomon emas...
+            li.person
+              span.name Feruza
+              span.preview
+                | Bugun havo juda issiq.
+                | va juda ajoyib
+            li.person
+              span.name Dilbar
+              span.preview Nima gaplar olamda
+            li.person
+              span.name Saad Lamjarred
+              span.preview Inta Muallim.
+            li.person
+              span.name Bobur Aka
+              span.preview Menga juda yoqti...
+            li.person
+              span.name Babu
+              span.preview
+                | Ceza - SusPus.mp3
+                | Video YouTubeda
+            li.person
+              span.name David
+              span.preview YooHoooo Hammaga Salom
+          .bottom
+            button Yangi Guruh
+        .right
+          .top
+            span
+              span.name Saud Sadikoff
+          .chat.active-chat
+            .bubble.you
+              span David Beckham
+              | Salom meni eshitayapsizmi?
+            .bubble.you
+              span David Beckham
+              | Men sizning muxlisingizman
+            .bubble.me ... uzr sizni tanimayman.
+            .bubble.me Jiddiymisiz?
+            .bubble.you
+              span David Beckham
+              | Ha chindan Davidman...
+            .bubble.you
+              span David Beckham
+              | Football afsonasi
+          .write
+            input(type='text', placeholder='Xabarni yozing...')
+            a.write-link.send(href='javascript:;')
+
+append javascripts
+  script(src="/javascripts/controller/chatController.js")
