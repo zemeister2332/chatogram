@@ -5,9 +5,14 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const logger = require('morgan');
 const passport = require('passport');
-//const mongoose = require('mongoose');
+
+const redisStore = require('./helpers/redisStore'); // kochirildi pasdan tepaga
+
+
 const dotenv = require('dotenv');
 dotenv.config();
+
+
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -32,7 +37,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
 app.use(session({
-  secret: process.env.SESSION_SECRET_KEY,
+  store: redisStore,
+  secret: process.env["SESSION_SECRET_KEY"],
   resave: false,
   saveUninitialized: true,
   cookie: { maxAge: 14 * 24 * 3600000 } // secure: true, https da ishlashga majburlaydi

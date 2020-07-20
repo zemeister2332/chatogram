@@ -10,47 +10,57 @@ block content
         .left
           .top
             ul.tab
-              li.conversations
-                a.active(href='#')  Chatlar
-              li.onlineUsers
-                a(href='#')  Tarmoqda
-          ul.people
-            li.person
-              span.name  Saud Sadikoff
-              span.preview Juda hayron qoldim...
-            li.person.active
-              span.name  Asror Zakari
-              span.preview Nima deyishgaham hayronman!
-            li.person
-              span.name  Bexruz
-              span.preview Lekin biz baribir yangi gilam olishimiz kerak.
-            li.person
-              span.name Shoxnur MS
-              span.preview Unchalik ham yomon emas...
-            li.person
-              span.name Feruza
-              span.preview
-                | Bugun havo juda issiq.
-                | va juda ajoyib
-            li.person
-              span.name Dilbar
-              span.preview Nima gaplar olamda
-            li.person
-              span.name Saad Lamjarred
-              span.preview Inta Muallim.
-            li.person
-              span.name Bobur Aka
-              span.preview Menga juda yoqti...
-            li.person
-              span.name Babu
-              span.preview
-                | Ceza - SusPus.mp3
-                | Video YouTubeda
-            li.person
-              span.name David
-              span.preview YooHoooo Hammaga Salom
+              li.conversations(ng-click="changeTab(1)")
+                a(ng-class="{active: activeTab === 1}")  Chatlar
+              li.onlineUsers(ng-click="changeTab(2)")
+                a(ng-class="{active: activeTab === 2}")  Tarmoqda
+
+          .tabArea
+            .tab-left(ng-show="activeTab === 1")
+              ul.people
+                li.person
+                  span.name  Saud Sadikoff
+                  span.preview Juda hayron qoldim...
+                li.person.active
+                  span.name  Asror Zakari
+                  span.preview Nima deyishgaham hayronman!
+                li.person
+                  span.name  Bexruz
+                  span.preview Lekin biz baribir yangi gilam olishimiz kerak.
+                li.person
+                  span.name Shoxnur MS
+                  span.preview Unchalik ham yomon emas...
+                li.person
+                  span.name Feruza
+                  span.preview
+                    | Bugun havo juda issiq.
+                    | va juda ajoyib
+                li.person
+                  span.name Dilbar
+                  span.preview Nima gaplar olamda
+                li.person
+                  span.name Saad Lamjarred
+                  span.preview Inta Muallim.
+                li.person
+                  span.name Bobur Aka
+                  span.preview Menga juda yoqti...
+                li.person
+                  span.name Babu
+                  span.preview
+                    | Ceza - SusPus.mp3
+                    | Video YouTubeda
+                li.person
+                  span.name David
+                  span.preview YooHoooo Hammaga Salom
+            .tab-right(ng-show="activeTab === 2")
+              ul.people
+                li.person(ng-repeat="user in onlineList")
+                  img(ng-src="{{ user.meta.profilePhotoUrl }}")
+                  span.name {{ user.meta.name }} {{ user.meta.surname }}
+                  //span.preview Juda hayron qoldim...
+
           .bottom
-            button Yangi Guruh
+            button(ng-click="newRoom()") Yangi Xona
         .right
           .top
             span
@@ -75,4 +85,5 @@ block content
             a.write-link.send(href='javascript:;')
 
 append javascripts
+  script(src="http://localhost:3000/socket.io/socket.io.js")
   script(src="/javascripts/controller/chatController.js")

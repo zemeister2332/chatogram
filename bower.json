@@ -8,6 +8,6 @@
   "license": "MIT",
   "homepage": "https://github.com/zemeister2332/chatogram",
   "dependencies": {
-    "angular": "^1.8.0"
+    "angular": "^1.7.0"
   }
 }

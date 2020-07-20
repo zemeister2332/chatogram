@@ -4,23 +4,22 @@ const passport = require('passport');
 const User = require('../models/users');
 
 passport.use(new GoogleStrategy({
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: process.env.GOOGLE_LOGIN_CALLBACK_URL
+        clientID: process.env["GOOGLE_CLIENT_ID"],
+        clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
+        callbackURL: process.env["GOOGLE_LOGIN_CALLBACK_URL"]
     }, ((accessToken, refreshToken, profile, done) => {
         const data = profile._json;
-        //console.log(data);
+        //console.log(data.sub);
 
         User.findOrCreate({
-            'googleId': data.id
+            'googleId': data.sub
         }, {
             name: data.given_name,
             surname: data.family_name,
-            profilePhotoUrl: data.picture.url
+            profilePhotoUrl: data.picture
         },(err,user) => {
             return done(err,user);
         })
-
     }
 )));
 

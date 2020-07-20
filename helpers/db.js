@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 module.exports = () => {
     mongoose.connect(
-        process.env.DB_STRING,
+        process.env["DB_STRING"],
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
