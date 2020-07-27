@@ -5,6 +5,7 @@ const io = socketio();
 // libs
 const Users = require('./lib/Users');
 const Rooms = require('./lib/Rooms');
+const Messages = require('./lib/Messages');
 
 const socketApi = {
     io
@@ -23,7 +24,13 @@ io.adapter(redisAdapter({
 
 
 io.on('connection', socket => {
-    console.log('a user is logged in with name: ' + socket.request.user.name);
+    //console.log('a user is logged in with name: ' + socket.request.user.name);
+
+    Rooms.list(rooms => {
+        //console.log(rooms)
+        io.emit('roomList', rooms)
+    });
+
     //let googleId = socket.request.user.googleId;
     Users.upsert(socket.id, socket.request.user);
 
@@ -32,8 +39,24 @@ io.on('connection', socket => {
         io.emit('onlineList', users);
     });
 
+    socket.on('newMessage', data => {
+        //console.log("Hellooo", data);
+        const messageData = {
+            ...data,
+            userId: socket.request.user._id,
+            username: socket.request.user.name,
+            surname: socket.request.user.surname
+        }
+        Messages.upsert(messageData);
+        socket.broadcast.emit('receiveMessage', messageData);
+    });
+
     socket.on('newRoom', roomName => {
         Rooms.upsert(roomName);
+        Rooms.list(rooms => {
+            //console.log(rooms)
+            io.emit('roomList', rooms)
+        });
     });
 
     socket.on('disconnect', () => {

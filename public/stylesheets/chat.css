@@ -292,6 +292,11 @@ ul,li{
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
 }
+
+.send{
+    cursor: pointer;
+}
+
 .container .right .write .write-link.attach:before {
     display: inline-block;
     float: left;
@@ -422,7 +427,13 @@ ul,li{
     text-align: center;
     padding-top: 16px
 }
-
+.loading{
+    text-align: center;
+    font-size: 18px;
+    padding: 30px 0;
+    /*position: absolute;
+    left: 180px;*/
+}
 @keyframes slideFromLeft {
     0% {
         margin-left: -200px;
@@ -463,3 +474,5 @@ ul,li{
         opacity: 1;
     }
 }
+
+

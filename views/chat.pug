@@ -18,40 +18,12 @@ block content
           .tabArea
             .tab-left(ng-show="activeTab === 1")
               ul.people
-                li.person
-                  span.name  Saud Sadikoff
-                  span.preview Juda hayron qoldim...
-                li.person.active
-                  span.name  Asror Zakari
-                  span.preview Nima deyishgaham hayronman!
-                li.person
-                  span.name  Bexruz
-                  span.preview Lekin biz baribir yangi gilam olishimiz kerak.
-                li.person
-                  span.name Shoxnur MS
-                  span.preview Unchalik ham yomon emas...
-                li.person
-                  span.name Feruza
-                  span.preview
-                    | Bugun havo juda issiq.
-                    | va juda ajoyib
-                li.person
-                  span.name Dilbar
-                  span.preview Nima gaplar olamda
-                li.person
-                  span.name Saad Lamjarred
-                  span.preview Inta Muallim.
-                li.person
-                  span.name Bobur Aka
-                  span.preview Menga juda yoqti...
-                li.person
-                  span.name Babu
-                  span.preview
-                    | Ceza - SusPus.mp3
-                    | Video YouTubeda
-                li.person
-                  span.name David
-                  span.preview YooHoooo Hammaga Salom
+                li.person(
+                  ng-repeat="room in roomList",
+                  ng-click="switchRoom(room)"
+                )
+                  span.name  {{ room.name }}
+
             .tab-right(ng-show="activeTab === 2")
               ul.people
                 li.person(ng-repeat="user in onlineList")
@@ -61,29 +33,26 @@ block content
 
           .bottom
             button(ng-click="newRoom()") Yangi Xona
-        .right
+        .right(ng-show="chatClicked")
           .top
             span
-              span.name Saud Sadikoff
+              span.name {{ chatName }}
+          .loading(ng-show="loadingMessages") Yuklanmoqda...
           .chat.active-chat
-            .bubble.you
-              span David Beckham
-              | Salom meni eshitayapsizmi?
-            .bubble.you
-              span David Beckham
-              | Men sizning muxlisingizman
-            .bubble.me ... uzr sizni tanimayman.
-            .bubble.me Jiddiymisiz?
-            .bubble.you
-              span David Beckham
-              | Ha chindan Davidman...
-            .bubble.you
-              span David Beckham
-              | Football afsonasi
-          .write
-            input(type='text', placeholder='Xabarni yozing...')
-            a.write-link.send(href='javascript:;')
+            .bubble(
+              ng-repeat="data in messages[roomId]",
+              ng-class="{false: 'you', true: 'me'}[data.userId == user._id]"
+              )
+              span {{ data.username }} {{ data.surname }}
+              | {{ data.message }}
+
+          .write(ng-show="!loadingMessages")
+            form(ng-submit="newMessage()")
+              input(placeholder='Xabarni yozing...', ng-model="message")
+              a.write-link.send(ng-click="newMessage()")
 
 append javascripts
-  script(src="http://localhost:3000/socket.io/socket.io.js")
+  script(src="/socket.io/socket.io.js")
+  script(src="/javascripts/services/userFactory.js")
+  script(src="/javascripts/services/chatFactory.js")
   script(src="/javascripts/controller/chatController.js")
