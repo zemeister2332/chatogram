@@ -23,7 +23,7 @@
     "passport-google-oauth20": "^2.0.0",
     "passport.socket.io": "0.0.0",
     "passport.socketio": "^3.7.0",
-    "pug": "2.0.0-beta11",
+    "pug": "3.0.1",
     "redis": "^3.0.2",
     "shortid": "^2.2.15",
     "socket.io": "^2.3.0",
